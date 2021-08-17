@@ -2,16 +2,23 @@ package com.example.passwordchecker
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.passwordchecker.databinding.PasswordFieldBinding
 
-class FragmentLogin : Fragment(R.layout.password_field) {
+class FragmentLogin : Fragment() {
 
     private var _binding: PasswordFieldBinding? = null
     private var binding: PasswordFieldBinding = _binding!!
+
+    lateinit var uppercase: TextView
+    lateinit var password: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,12 +31,23 @@ class FragmentLogin : Fragment(R.layout.password_field) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var passwordTextLength = binding.passwordBox.text.length
-        with(binding){
-            if(passwordTextLength > 3) {
-                uppercase.setTypeface(null, Typeface.BOLD)
+
+        uppercase = binding.uppercase as TextView
+        password = binding.passwordBox as EditText
+
+        password.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //binding.uppercase.setTypeface(null, Typeface.BOLD)
             }
-        }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                uppercase.text = "hello"
+                //binding.uppercase.setTypeface(null, Typeface.BOLD)
+            }
+        })
     }
 
     override fun onDestroyView() {
