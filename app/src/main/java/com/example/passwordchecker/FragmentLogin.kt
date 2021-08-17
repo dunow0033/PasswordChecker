@@ -1,5 +1,6 @@
 package com.example.passwordchecker
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
@@ -17,8 +18,8 @@ class FragmentLogin : Fragment() {
     private var _binding: PasswordFieldBinding? = null
     private var binding: PasswordFieldBinding = _binding!!
 
-    lateinit var uppercase: TextView
-    lateinit var password: EditText
+    var uppercase: TextView = binding.uppercase
+    var password: EditText = binding.passwordBox
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,20 +33,19 @@ class FragmentLogin : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        uppercase = binding.uppercase as TextView
-        password = binding.passwordBox as EditText
 
         password.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                //binding.uppercase.setTypeface(null, Typeface.BOLD)
+                uppercase.setTextColor(Color.BLUE)
+                uppercase.setTypeface(null, Typeface.BOLD)
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                uppercase.text = "hello"
-                //binding.uppercase.setTypeface(null, Typeface.BOLD)
+                uppercase.setTextColor(Color.BLUE)
+                uppercase.setTypeface(null, Typeface.BOLD)
             }
         })
     }
